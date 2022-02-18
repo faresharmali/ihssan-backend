@@ -2,16 +2,17 @@ const express = require("express");
 const {
   AddFamily,
   GetFamily,
+  GetAllFamilies,
   UpdateFamily,
   DeleteFamily,
 } = require("../Controllers/FamiliesController");
 
+const Router = express.Router();
 
-const FamilyRouter = express.Router();
+Router.route("/").get(GetAllFamilies);
+Router.route("/:id").get(GetFamily);
+Router.route("/update/:id").get(UpdateFamily);
+Router.route("/delete/:id").get(DeleteFamily);
+Router.route("/add").get(AddFamily);
 
-FamilyRouter.route("/get").get(GetFamily);
-FamilyRouter.route("/update").get(UpdateFamily);
-FamilyRouter.route("/delete").get(DeleteFamily);
-FamilyRouter.route("/add").get(AddFamily);
-
-module.exports = FamilyRouter;
+module.exports = Router;
