@@ -9,10 +9,9 @@ const {
 
 const Router = express.Router();
 
-Router.route("/").get(GetAllUsers);
+Router.route("/").get(GetAllUsers).post(AddUser);
 Router.route("/:id").get(GetUser);
-Router.route("/update/:id").get(UpdateUser);
-Router.route("/delete/:id").get(DeleteUser);
-Router.route("/add").get(AddUser);
+Router.route("/update/:id").patch(UpdateUser);
+Router.route("/delete/:id").delete(DeleteUser);
 
 module.exports = Router;

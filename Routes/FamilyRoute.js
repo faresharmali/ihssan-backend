@@ -9,10 +9,9 @@ const {
 
 const Router = express.Router();
 
-Router.route("/").get(GetAllFamilies);
+Router.route("/").get(GetAllFamilies).post(AddFamily);
 Router.route("/:id").get(GetFamily);
-Router.route("/update/:id").get(UpdateFamily);
-Router.route("/delete/:id").get(DeleteFamily);
-Router.route("/add").get(AddFamily);
+Router.route("/update/:id").patch(UpdateFamily);
+Router.route("/delete/:id").delete(DeleteFamily);
 
 module.exports = Router;

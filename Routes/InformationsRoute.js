@@ -9,10 +9,9 @@ const {
 
 const Router = express.Router();
 
-Router.route("/get").get(GetAllInformation);
+Router.route("/get").get(GetAllInformation).post(AddInformation);
 Router.route("/get/:id").get(GetInformation);
-Router.route("/update").get(UpdateInformation);
-Router.route("/delete").get(DeleteInformation);
-Router.route("/add").get(AddInformation);
+Router.route("/update").patch(UpdateInformation);
+Router.route("/delete").delete(DeleteInformation);
 
 module.exports = Router;
