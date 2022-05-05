@@ -15,4 +15,4 @@ const KidSchema = mongoose.Schema({
 
 const Kid = mongoose.model("Kid", KidSchema);
 
-module.exports = Family;
+module.exports = Kid;

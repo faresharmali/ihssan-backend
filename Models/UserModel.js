@@ -7,10 +7,10 @@ const UserSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-  birthdate: String,
-  schoolLevel: String,
-  health: String,
-  gender: String,
+  phone: String,
+  job: String,
+  username:String,
+  password:String
 });
 
 const User = mongoose.model("User", UserSchema);
