@@ -2,15 +2,14 @@ const mongoose = require("mongoose");
 
 const FamilySchema = mongoose.Schema({
   identifier: String,
-
-  name: {
-    type: String,
-    required: true,
-    unique: true,
-  },
+  fatherFirstName:String,
+  fatherLastName:String,
+  motherFullName:String,
+  donation:Number,
   salary: Number,
   kids: Array,
-  date: String,
+  phone: String,
+  signupDate: String,
   adresse: String,
 });
 

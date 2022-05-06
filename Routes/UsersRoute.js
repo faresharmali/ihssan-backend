@@ -10,7 +10,7 @@ const {
 const Router = express.Router();
 
 Router.route("/").get(GetAllUsers);
-Router.route("/add").get(AddUser)
+Router.route("/add").post(AddUser)
 Router.route("/:id").get(GetUser);
 Router.route("/update/:id").patch(UpdateUser);
 Router.route("/delete/:id").delete(DeleteUser);

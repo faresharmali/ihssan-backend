@@ -10,10 +10,10 @@ const InformationsRouter = require("./Routes/InformationsRoute");
 
 
 const CheckToken = (req, res, next) => {
-  jwt.verify(req.body.token,  process.env.JWTSECRET, (err, user) => {
+  jwt.verify(req.headers.token,  process.env.JWTSECRET, (err, user) => {
+    console.log("error",err)
     if (err) return res.status(403).json({ message: "Not Authorized" });
     req.body.user = user;
-    console.log(req.body);
     next();
   });
 };

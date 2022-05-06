@@ -21,6 +21,7 @@ exports.AddUser = (req, res) => {
 exports.GetAllUsers = async (req, res) => {
   try {
     const data = await User.find();
+    console.log(data)
     res.status(200).json({
       status: "success",
       result: data,
