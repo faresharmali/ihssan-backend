@@ -8,6 +8,7 @@ const UserSchema = mongoose.Schema({
     unique: true,
   },
   departement: String,
+  type: String,
   phone: String,
   intermidate:String,
 });

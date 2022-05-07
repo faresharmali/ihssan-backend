@@ -7,6 +7,7 @@ const FamilyRouter = require("./Routes/FamilyRoute");
 const UsersRouter = require("./Routes/UsersRoute");
 const AuthRouter = require("./Routes/authRoute");
 const InformationsRouter = require("./Routes/InformationsRoute");
+const DonatorRouter = require("./Routes/DonatorRoute");
 
 
 const CheckToken = (req, res, next) => {
@@ -22,5 +23,6 @@ app.use("/families", CheckToken, FamilyRouter);
 app.use("/users", CheckToken, UsersRouter);
 app.use("/informations", CheckToken, InformationsRouter);
 app.use("/auth", AuthRouter);
+app.use("/Donators", DonatorRouter);
 
 module.exports = app;

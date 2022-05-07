@@ -3,12 +3,12 @@ Content-Type: application/json
 token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjczNzFkOWE0MjkzYzVmMGYxZTc1N2EiLCJuYW1lIjoiZmFyZXMgaGFybWFsaSIsInBob25lIjoiMDY2MDgxODQxMiIsImpvYiI6ImFkbWluaXN0cmF0aW9uIiwidXNlcm5hbWUiOiJmYXJlczA4MTk5OCIsInBhc3N3b3JkIjoiZmFyZXMwODE5OTgiLCJfX3YiOjAsImlhdCI6MTY1MTc2MjI2OX0.1gwCLnvMmMrOh0ru414E4iO_uq-qZ0MFRk8nZNsyRTc
 
 {
-    "fatherFirstName":"عمر كوسوفي",
-"fatherLastName":"0684654654",
-"motherFullName":"قسم الادارة",
+    "fatherFirstName":"عمر",
+"fatherLastName":"رحال",
+"motherFullName":" سامية شرفي",
 "donation":9000,
 "salary":20000,
-"phone":"Omar06",
-"adresse":"Omar06"
+"phone":"0660818412",
+"adresse":"الرغاية"
 
 }
