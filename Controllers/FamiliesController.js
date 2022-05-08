@@ -1,6 +1,7 @@
 const Family = require("../Models/FamilyModel");
 exports.AddFamily = (req, res) => {
   Family.create({
+    identifier:req.body.id,
     fatherFirstName: req.body.fatherFirstName,
     fatherLastName: req.body.fatherLastName,
     motherFullName: req.body.motherFullName,

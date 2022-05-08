@@ -2,6 +2,7 @@ const User = require("../Models/UserModel");
 
 exports.AddUser = (req, res) => {
   User.create({
+    identifier:req.body.id,
     name: req.body.name,
     phone: req.body.phone,
     job: req.body.job,
@@ -21,7 +22,6 @@ exports.AddUser = (req, res) => {
 exports.GetAllUsers = async (req, res) => {
   try {
     const data = await User.find();
-    console.log(data)
     res.status(200).json({
       status: "success",
       result: data,

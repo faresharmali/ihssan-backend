@@ -1,12 +1,13 @@
 const Donator = require("../Models/DonatorModel");
 
 exports.AddDonator = (req, res) => {
+  console.log("donator creation")
     Donator.create({
     name: req.body.name,
     phone: req.body.phone,
     job: req.body.job,
-    username: req.body.username,
-    password: req.body.password,
+    user:req.body.user,
+    type:req.body.type
   })
     .then(() => {
       res.status(200).json({
@@ -21,7 +22,6 @@ exports.AddDonator = (req, res) => {
 exports.GetDonators = async (req, res) => {
   try {
     const data = await Donator.find();
-    console.log(data)
     res.status(200).json({
       status: "success",
       result: data,

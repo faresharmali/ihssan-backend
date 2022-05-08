@@ -7,10 +7,10 @@ const UserSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-  departement: String,
+  job: String,
   type: String,
   phone: String,
-  intermidate:String,
+  user:String,
 });
 
 const Donator = mongoose.model("Donator", UserSchema);
