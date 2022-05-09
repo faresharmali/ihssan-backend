@@ -5,6 +5,7 @@ const {
   GetAllFamilies,
   UpdateFamily,
   DeleteFamily,
+  AddChild,
 } = require("../Controllers/FamiliesController");
 
 const Router = express.Router();
@@ -14,5 +15,6 @@ Router.route("/:id").get(GetFamily);
 Router.route("/update/:id").patch(UpdateFamily);
 Router.route("/delete/:id").delete(DeleteFamily);
 Router.route("/add").post(AddFamily);
+Router.route("/addchild").post(AddChild);
 
 module.exports = Router;

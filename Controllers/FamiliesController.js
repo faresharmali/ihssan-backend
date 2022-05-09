@@ -11,6 +11,7 @@ exports.AddFamily = (req, res) => {
     phone: req.body.phone,
     signupDate: new Date(),
     adresse: req.body.adresse,
+    wasseet: req.body.wasseet,
   })
     .then(() => {
       res.status(200).json({
@@ -45,4 +46,17 @@ exports.DeleteFamily = (req, res) => {
 };
 exports.UpdateFamily = (req, res) => {
   res.send("UpdateFamily");
+};
+exports.AddChild = async (req, res) => {
+const MyFamily = await Family.findOne({ identifier: req.body.identifier }).exec();
+if(MyFamily){
+      let Childrern=[...MyFamily.kids]
+      Childrern.push(req.body.kid)
+      MyFamily.kids=Childrern
+      MyFamily.save().then((response)=>{
+       res.status(200).json({ok:true,data:MyFamily})
+      })
+    }else{
+    }
+
 };

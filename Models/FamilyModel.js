@@ -11,6 +11,7 @@ const FamilySchema = mongoose.Schema({
   phone: String,
   signupDate: String,
   adresse: String,
+  wasseet: String,
 });
 
 const Family = mongoose.model("Family", FamilySchema);
