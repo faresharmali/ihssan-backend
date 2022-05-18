@@ -1,7 +1,7 @@
 const Family = require("../Models/FamilyModel");
 exports.AddFamily = (req, res) => {
   Family.create({
-    identifier:req.body.id,
+    identifier: req.body.id,
     fatherFirstName: req.body.fatherFirstName,
     fatherLastName: req.body.fatherLastName,
     motherFullName: req.body.motherFullName,
@@ -24,7 +24,6 @@ exports.AddFamily = (req, res) => {
     });
 };
 exports.GetAllFamilies = async (req, res) => {
-    console.log("called")
   try {
     const data = await Family.find();
     res.status(200).json({
@@ -48,15 +47,17 @@ exports.UpdateFamily = (req, res) => {
   res.send("UpdateFamily");
 };
 exports.AddChild = async (req, res) => {
-const MyFamily = await Family.findOne({ identifier: req.body.identifier }).exec();
-if(MyFamily){
-      let Childrern=[...MyFamily.kids]
-      Childrern.push(req.body.kid)
-      MyFamily.kids=Childrern
-      MyFamily.save().then((response)=>{
-       res.status(200).json({ok:true,data:MyFamily})
-      })
-    }else{
-    }
-
+  const MyFamily = await Family.findOne({
+    identifier: req.body.identifier,
+  }).exec();
+  if (MyFamily) {
+    let Childrern = [...MyFamily.kids];
+    Childrern.push(req.body.kid);
+    MyFamily.kids = Childrern;
+    MyFamily.save().then((response) => {
+      res.status(200).json({ ok: true, data: MyFamily });
+    });
+  } else {
+    console.log("not found")
+  }
 };

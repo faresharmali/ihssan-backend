@@ -1,5 +1,5 @@
 const User = require("../Models/UserModel");
-
+const Reservation =require("../Models/ReservationModel")
 exports.AddUser = (req, res) => {
   User.create({
     identifier:req.body.id,
@@ -32,6 +32,40 @@ exports.GetAllUsers = async (req, res) => {
       message: e,
     });
   }
+};
+exports.getReservation = async (req, res) => {
+  console.log(req)
+  try {
+    const data = await Reservation.find();
+    res.status(200).json({
+      status: "success",
+      result: data,
+    });
+  } catch (e) {
+    console.log(e)
+    res.status(404).json({
+      status: "error",
+      message: e,
+    });
+  }
+};
+exports.AddReservation = async (req, res) => {
+  Reservation.create({
+    identifier:req.body.id,
+    description: req.body.description,
+    date: req.body.date,
+    starttime: req.body.starttime,
+    endtime: req.body.endtime,
+  })
+    .then(() => {
+      res.status(200).json({
+        ok: true,
+      });
+    })
+    .catch((e) => {
+      console.log(e);
+      res.sendStatus(404);
+    });
 };
 exports.GetUser = (req, res) => {
   res.send(req.params.id);
