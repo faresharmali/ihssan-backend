@@ -1,8 +1,8 @@
 const User = require("../Models/UserModel");
-const Reservation =require("../Models/ReservationModel")
+const Reservation = require("../Models/ReservationModel");
 exports.AddUser = (req, res) => {
   User.create({
-    identifier:req.body.id,
+    identifier: req.body.id,
     name: req.body.name,
     phone: req.body.phone,
     job: req.body.job,
@@ -34,7 +34,7 @@ exports.GetAllUsers = async (req, res) => {
   }
 };
 exports.getReservation = async (req, res) => {
-  console.log(req)
+  console.log(req);
   try {
     const data = await Reservation.find();
     res.status(200).json({
@@ -42,7 +42,7 @@ exports.getReservation = async (req, res) => {
       result: data,
     });
   } catch (e) {
-    console.log(e)
+    console.log(e);
     res.status(404).json({
       status: "error",
       message: e,
@@ -51,7 +51,7 @@ exports.getReservation = async (req, res) => {
 };
 exports.AddReservation = async (req, res) => {
   Reservation.create({
-    identifier:req.body.id,
+    identifier: req.body.id,
     description: req.body.description,
     date: req.body.date,
     starttime: req.body.starttime,
@@ -76,4 +76,3 @@ exports.DeleteUser = (req, res) => {
 exports.UpdateUser = (req, res) => {
   res.send("UpdateFamily");
 };
-
