@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const FamilySchema = mongoose.Schema({
-  identifier: String,
+  id: String,
   fatherFirstName:String,
   fatherLastName:String,
   motherFullName:String,

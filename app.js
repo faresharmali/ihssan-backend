@@ -9,6 +9,7 @@ const AuthRouter = require("./Routes/authRoute");
 const InformationsRouter = require("./Routes/InformationsRoute");
 const DonatorRouter = require("./Routes/DonatorRoute");
 const ReportsRouter = require("./Routes/ReportRoute");
+const ActivityRouter = require("./Routes/ActivitiesRoute");
 
 
 const CheckToken = (req, res, next) => {
@@ -25,4 +26,5 @@ app.use("/informations", CheckToken, InformationsRouter);
 app.use("/auth", AuthRouter);
 app.use("/donators", DonatorRouter);
 app.use("/reports", ReportsRouter);
+app.use("/activities", ActivityRouter);
 module.exports = app;
