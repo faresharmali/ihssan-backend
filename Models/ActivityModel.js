@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const ActivitySchema = mongoose.Schema({
   id: String,
-  famillies: String,
-  kids:Array,
+  famillies: Array,
   date:Date,
+  kids:Array,
   title:String,
   type:String,
-  description:String,
+  benificier:String,
   author:String
 
 });

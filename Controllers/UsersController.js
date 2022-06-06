@@ -2,7 +2,7 @@ const User = require("../Models/UserModel");
 const Reservation = require("../Models/ReservationModel");
 exports.AddUser = (req, res) => {
   User.create({
-    identifier: req.body.id,
+    id: req.body.id,
     name: req.body.name,
     phone: req.body.phone,
     job: req.body.job,

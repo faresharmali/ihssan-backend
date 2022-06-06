@@ -1,14 +1,17 @@
-post http://192.168.100.21:3000/users/addreservation
+post http://192.168.100.21:3000/users/add
 Content-Type: application/json
 token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjczNzFkOWE0MjkzYzVmMGYxZTc1N2EiLCJuYW1lIjoiZmFyZXMgaGFybWFsaSIsInBob25lIjoiMDY2MDgxODQxMiIsImpvYiI6ImFkbWluaXN0cmF0aW9uIiwidXNlcm5hbWUiOiJmYXJlczA4MTk5OCIsInBhc3N3b3JkIjoiZmFyZXMwODE5OTgiLCJfX3YiOjAsImlhdCI6MTY1MTc2MjI2OX0.1gwCLnvMmMrOh0ru414E4iO_uq-qZ0MFRk8nZNsyRTc
 
 
 
-{
-        "identifier":"id",
-        "description":"تدريس اللغة العربية",
-        "date":"03/11/2025",
-        "starttime":"12:30",
-        "endtime":"16:30"
+
+   {
+      "id":"1",
+    "name": "فارس حرمالي",
+    "phone": "0660818412",
+    "job": "قسم الادارة",
+    "username": "fares081998",
+    "password": "fares081998"
     
 }   
+    

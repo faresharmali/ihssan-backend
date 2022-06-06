@@ -1,17 +1,12 @@
 const express = require("express");
 const {
-    AddInformation,
-    GetAllInformation,
-    GetInformation,
-    UpdateInformation,
-    DeleteInformation
+  CreateInformation,
+  GetAllInformations
 } = require("../Controllers/InformationsController");
 
 const Router = express.Router();
 
-Router.route("/get").get(GetAllInformation).post(AddInformation);
-Router.route("/get/:id").get(GetInformation);
-Router.route("/update").patch(UpdateInformation);
-Router.route("/delete").delete(DeleteInformation);
+Router.route("/").get(GetAllInformations)
+Router.route("/add").post(CreateInformation);
 
 module.exports = Router;

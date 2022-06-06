@@ -1,13 +1,14 @@
 const Donator = require("../Models/DonatorModel");
+const Donation = require("../Models/DonationModel");
 
 exports.AddDonator = (req, res) => {
-  console.log("donator creation")
-    Donator.create({
+  console.log("donator creation");
+  Donator.create({
     name: req.body.name,
     phone: req.body.phone,
     job: req.body.job,
-    user:req.body.user,
-    type:req.body.type
+    user: req.body.user,
+    type: req.body.type,
   })
     .then(() => {
       res.status(200).json({
@@ -43,3 +44,18 @@ exports.UpdateUser = (req, res) => {
   res.send("UpdateFamily");
 };
 
+exports.AddDonation = (req, res) => {
+  console.log("donation creation");
+  Donation.create({
+    ...req.body,
+  })
+    .then(() => {
+      res.status(200).json({
+        ok: true,
+      });
+    })
+    .catch((e) => {
+      console.log(e);
+      res.sendStatus(404);
+    });
+};

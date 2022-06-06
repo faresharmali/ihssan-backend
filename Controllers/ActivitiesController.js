@@ -1,6 +1,7 @@
 const Activity = require("../Models/ActivityModel");
 
 exports.CreateActivity = (req, res) => {
+  console.log("ow hello")
     Activity.create({
     ...req.body,
   })

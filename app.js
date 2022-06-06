@@ -21,7 +21,7 @@ const CheckToken = (req, res, next) => {
 };
 
 app.use("/families", CheckToken, FamilyRouter);
-app.use("/users", CheckToken, UsersRouter);
+app.use("/users", UsersRouter);
 app.use("/informations", CheckToken, InformationsRouter);
 app.use("/auth", AuthRouter);
 app.use("/donators", DonatorRouter);
