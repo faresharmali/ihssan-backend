@@ -20,7 +20,7 @@ const CheckToken = (req, res, next) => {
   });
 };
 
-app.use("/",()=>{
+app.use("/",(req,res)=>{
   res.status(200).json({message:"hello"})
 });
 app.use("/families", CheckToken, FamilyRouter);
