@@ -9,6 +9,6 @@ mongoose
   .then(() => {
     console.log("database Connected");
   });
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("app working on server 3000");
 });
