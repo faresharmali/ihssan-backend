@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const UserSchema = mongoose.Schema({
-  identifier: String,
+  id: String,
   name: {
     type: String,
     required: true,
@@ -11,6 +11,7 @@ const UserSchema = mongoose.Schema({
   type: String,
   phone: String,
   user:String,
+  famillies:Array
 });
 
 const Donator = mongoose.model("Donator", UserSchema);

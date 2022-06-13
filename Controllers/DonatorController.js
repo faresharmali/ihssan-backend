@@ -4,11 +4,7 @@ const Donation = require("../Models/DonationModel");
 exports.AddDonator = (req, res) => {
   console.log("donator creation");
   Donator.create({
-    name: req.body.name,
-    phone: req.body.phone,
-    job: req.body.job,
-    user: req.body.user,
-    type: req.body.type,
+    ...req.body
   })
     .then(() => {
       res.status(200).json({

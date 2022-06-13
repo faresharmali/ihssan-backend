@@ -34,28 +34,24 @@ exports.GetAllUsers = async (req, res) => {
   }
 };
 exports.getReservation = async (req, res) => {
-  console.log(req);
+  console.log("called");
   try {
     const data = await Reservation.find();
     res.status(200).json({
-      status: "success",
-      result: data,
+      ok: true,
+      meetings: data,
     });
   } catch (e) {
     console.log(e);
     res.status(404).json({
-      status: "error",
+      ok: false,
       message: e,
     });
   }
 };
 exports.AddReservation = async (req, res) => {
   Reservation.create({
-    identifier: req.body.id,
-    description: req.body.description,
-    date: req.body.date,
-    starttime: req.body.starttime,
-    endtime: req.body.endtime,
+    ...req.body,
   })
     .then(() => {
       res.status(200).json({
