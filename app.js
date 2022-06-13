@@ -20,6 +20,9 @@ const CheckToken = (req, res, next) => {
   });
 };
 
+app.use("/",()=>{
+  res.status(200).json({message:"hello"})
+});
 app.use("/families", CheckToken, FamilyRouter);
 app.use("/users", UsersRouter);
 app.use("/informations", CheckToken, InformationsRouter);
