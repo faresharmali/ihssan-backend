@@ -10,8 +10,12 @@ const UserSchema = mongoose.Schema({
   job: String,
   type: String,
   phone: String,
-  user:String,
-  famillies:Array
+  user: String,
+  famillies: Array,
+  nextPayment: Date,
+  joined: Date,
+  lastPayement:Date,
+  donationAmount:Number
 });
 
 const Donator = mongoose.model("Donator", UserSchema);

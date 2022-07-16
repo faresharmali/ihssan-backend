@@ -47,7 +47,6 @@ exports.UpdateFamily = (req, res) => {
   res.send("UpdateFamily");
 };
 exports.AddChild = async (req, res) => {
-
   const MyFamily = await Family.findOne({
     id: req.body.id,
   }).exec();

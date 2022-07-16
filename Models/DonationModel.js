@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 
 const DonationSchema = mongoose.Schema({
   identifier: String,
-  donator: String,
+  donatorInfos: String,
   type: String,
-  date:Date,
+  date: Date,
+  name:String,
+  amount:Number
 });
 
 const Donation = mongoose.model("Donation", DonationSchema);
-
 module.exports = Donation;
