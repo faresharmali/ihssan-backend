@@ -12,10 +12,11 @@ const ReportsRouter = require("./Routes/ReportRoute");
 const ActivityRouter = require("./Routes/ActivitiesRoute");
 const IngredientRouter = require("./Routes/IngredientRoute");
 const StatusRouter = require("./Routes/StatusRoute");
+const TransactionRouter = require("./Routes/TransactionsRoute");
 
 const CheckToken = (req, res, next) => {
   jwt.verify(req.headers.token, process.env.JWTSECRET, (err, user) => {
-    if (err) return res.status(403).json({ message: "Not Authorized" });
+    if (err) return res.status(403).json({ok:false, message: "Not Authorized" });
     req.body.user = user;
     next();
   });
@@ -30,4 +31,5 @@ app.use("/reports", ReportsRouter);
 app.use("/activities", ActivityRouter);
 app.use("/ingredients", IngredientRouter);
 app.use("/status", StatusRouter);
+app.use("/transactions", TransactionRouter);
 module.exports = app;

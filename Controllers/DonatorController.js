@@ -6,7 +6,7 @@ exports.AddDonator = (req, res) => {
     ...req.body,
     nextPayment: new Date(),
     joined: new Date(),
-    lastPayement:null,
+    lastPayement:"",
   })
     .then(() => {
       res.status(200).json({

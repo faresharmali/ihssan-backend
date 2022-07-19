@@ -18,7 +18,6 @@ exports.GetStatus = async (req, res) => {
   }
 };
 exports.ChangeStatus = async (req, res) => {
-    console.log("change status")
   Status.create({
     ...req.body,
   })
