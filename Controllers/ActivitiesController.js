@@ -44,7 +44,6 @@ exports.GetEducationGroupes = async (req, res) => {
   }
 };
 exports.AddEducationMember = async (req, res) => {
-  console.log("hello")
   Education.create({
     ...req.body,
   })

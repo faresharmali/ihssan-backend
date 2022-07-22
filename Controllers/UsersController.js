@@ -8,6 +8,8 @@ exports.AddUser = (req, res) => {
     job: req.body.job,
     username: req.body.username,
     password: req.body.password,
+    famillies: req.body.famillies,
+    joined: new Date(),
   })
     .then(() => {
       res.status(200).json({
@@ -23,18 +25,17 @@ exports.GetAllUsers = async (req, res) => {
   try {
     const data = await User.find();
     res.status(200).json({
-      status: "success",
+      ok: true,
       result: data,
     });
   } catch (e) {
     res.status(404).json({
-      status: "error",
+      ok: false,
       message: e,
     });
   }
 };
 exports.getReservation = async (req, res) => {
-  console.log("called");
   try {
     const data = await Reservation.find();
     res.status(200).json({
