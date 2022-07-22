@@ -12,7 +12,9 @@ const FamilySchema = mongoose.Schema({
   signupDate: String,
   adresse: String,
   wasseet: String,
-  kofa:Boolean
+  kofa:Boolean,
+  sick:Boolean,
+  sickness:String,
 });
 
 const Family = mongoose.model("Family", FamilySchema);
