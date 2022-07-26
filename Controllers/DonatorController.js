@@ -87,3 +87,17 @@ exports.ExtendKafala = async (req, res) => {
     console.log("not found");
   }
 };
+exports.UpdateDonator = async (req, res) => {
+  const MyUser = await Donator.findOne({
+    id: req.body.id,
+  }).exec();
+  if (MyUser) {
+    MyUser.famillies = [...req.body.famillies];
+    MyUser.orphans = [...req.body.orphans];
+    MyUser.save().then((response) => {
+      res.status(200).json({ ok: true, data: MyUser });
+    });
+  } else {
+    console.log("not found");
+  }
+};

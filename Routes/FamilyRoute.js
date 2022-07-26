@@ -12,7 +12,7 @@ const Router = express.Router();
 
 Router.route("/").get(GetAllFamilies)
 Router.route("/:id").get(GetFamily);
-Router.route("/update/:id").patch(UpdateFamily);
+Router.route("/update").post(UpdateFamily);
 Router.route("/delete/:id").delete(DeleteFamily);
 Router.route("/add").post(AddFamily);
 Router.route("/addchild").post(AddChild);

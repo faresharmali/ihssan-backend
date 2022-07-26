@@ -19,9 +19,7 @@ exports.AddProgramItem = async (req, res) => {
 };
 exports.CreateProgram = async (req, res) => {
   Program.create({
-    id: "1",
-    programs: [],
-    departement: "activities",
+    ...req.body,
   })
     .then(() => {
       res.status(200).json({
@@ -35,13 +33,11 @@ exports.CreateProgram = async (req, res) => {
 };
 exports.GetProgram = async (req, res) => {
   try {
-    const MyProgram = await Program.findOne({
-      departement: req.headers.departement,
-    }).exec();
-    if (MyProgram) {
+    const result = await Program.find();
+    if (result) {
       res.status(200).json({
         ok: true,
-        data: MyProgram,
+        result: result,
       });
     } else {
       res.status(200).json({

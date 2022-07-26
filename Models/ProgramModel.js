@@ -2,8 +2,9 @@ const mongoose = require("mongoose");
 
 const ProgramScehema = mongoose.Schema({
   id: String,
-  departement: String,
-  items: Array,
+  section: String,
+  title: String,
+  date:Date
 });
 
 const Program = mongoose.model("Program", ProgramScehema);

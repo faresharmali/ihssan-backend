@@ -1,7 +1,6 @@
 const Report = require("../Models/ReportModel");
 
 exports.CreateReport = (req, res) => {
-  console.log("Report creation");
   Report.create({
     ...req.body,
   })

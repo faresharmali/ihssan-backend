@@ -12,6 +12,7 @@ const UserSchema = mongoose.Schema({
   phone: String,
   user: String,
   famillies: Array,
+  orphans: Array,
   nextPayment: Date,
   joined: Date,
   lastPayement:Date,

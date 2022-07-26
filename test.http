@@ -1,7 +1,12 @@
-get http://localhost:3000/users
+POST https://exp.host/--/api/v2/push/send
 Content-Type: application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjk4ZDM2NDY5NjgyMDlmOTYyNTYwYjgiLCJpZCI6IjEiLCJuYW1lIjoi2YHYp9ix2LMg2K3YsdmF2KfZhNmKIiwicGhvbmUiOiIwNjYwODE4NDEyIiwiam9iIjoi2YLYs9mFINin2YTYp9iv2KfYsdipIiwidXNlcm5hbWUiOiJmYXJlczA4MTk5OCIsInBhc3N3b3JkIjoiZmFyZXMwODE5OTgiLCJfX3YiOjAsImlhdCI6MTY1NDE4MzEyNn0.jyO0Z85ngqNqnUAXqCLfYptd4w0y_TlTnGXoO-npH7M
 
+{
+      "to": "ExponentPushToken[v3QWJqF6DdhG87DQLfb0mn]",
+      "sound": "default",
+      "title": "جمعية إحسان لكفالة الأيتام",
+      "body": "تم اضافة معلومة تخص قسمك ",
+      "data": { "someData": "goes here"}
 
-
+}
 

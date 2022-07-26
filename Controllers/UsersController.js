@@ -1,5 +1,6 @@
 const User = require("../Models/UserModel");
 const Reservation = require("../Models/ReservationModel");
+const Token = require("../Models/TokenModel");
 exports.AddUser = (req, res) => {
   User.create({
     id: req.body.id,
@@ -12,8 +13,13 @@ exports.AddUser = (req, res) => {
     joined: new Date(),
   })
     .then(() => {
-      res.status(200).json({
-        ok: true,
+      Token.create({
+        id: req.body.id,
+        token: "null",
+      }).then(() => {
+        res.status(200).json({
+          ok: true,
+        });
       });
     })
     .catch((e) => {
@@ -70,6 +76,16 @@ exports.GetUser = (req, res) => {
 exports.DeleteUser = (req, res) => {
   res.send("DeleteFamily");
 };
-exports.UpdateUser = (req, res) => {
-  res.send("UpdateFamily");
+exports.UpdateUser = async (req, res) => {
+  const MyUser = await User.findOne({
+    id: req.body.id,
+  }).exec();
+  if (MyUser) {
+    MyUser.famillies = [...req.body.famillies];
+    MyUser.save().then((response) => {
+      res.status(200).json({ ok: true, data: MyUser });
+    });
+  } else {
+    console.log("not found");
+  }
 };

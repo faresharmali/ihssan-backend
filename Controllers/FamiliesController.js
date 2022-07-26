@@ -11,7 +11,10 @@ exports.AddFamily = (req, res) => {
     phone: req.body.phone,
     signupDate: new Date(),
     adresse: req.body.adresse,
+    sick: req.body.sick,
+    sickness: req.body.sickness,
     wasseet: req.body.wasseet,
+    kofa: req.body.kofa,
   })
     .then(() => {
       res.status(200).json({
@@ -43,8 +46,28 @@ exports.GetFamily = (req, res) => {
 exports.DeleteFamily = (req, res) => {
   res.send("DeleteFamily");
 };
-exports.UpdateFamily = (req, res) => {
-  res.send("UpdateFamily");
+exports.UpdateFamily = async (req, res) => {
+  const MyFamily = await Family.findOne({
+    id: req.body.id,
+  }).exec();
+  if (MyFamily) {
+    MyFamily.fatherFirstName= req.body.fatherFirstName
+    MyFamily.fatherLastName= req.body.fatherLastName
+    MyFamily.motherFullName= req.body.motherFullName
+    MyFamily.donation= req.body.donation
+    MyFamily.salary= req.body.salary
+    MyFamily.phone= req.body.phone
+    MyFamily.adresse= req.body.adresse
+    MyFamily.sick= req.body.sick
+    MyFamily.sickness= req.body.sickness
+    MyFamily.wasseet= req.body.wasseet
+    MyFamily.kofa= req.body.kofa
+    MyFamily.save().then((response) => {
+      res.status(200).json({ ok: true, data: MyFamily });
+    });
+  } else {
+    console.log("not found");
+  }
 };
 exports.AddChild = async (req, res) => {
   const MyFamily = await Family.findOne({
@@ -58,6 +81,6 @@ exports.AddChild = async (req, res) => {
       res.status(200).json({ ok: true, data: MyFamily });
     });
   } else {
-    console.log("not found")
+    console.log("not found");
   }
 };
