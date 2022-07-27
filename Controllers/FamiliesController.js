@@ -62,7 +62,9 @@ exports.UpdateFamily = async (req, res) => {
     MyFamily.sickness= req.body.sickness
     MyFamily.wasseet= req.body.wasseet
     MyFamily.kofa= req.body.kofa
+    MyFamily.kids= req.body.kids
     MyFamily.save().then((response) => {
+      console.log("updated",req.body.kids)
       res.status(200).json({ ok: true, data: MyFamily });
     });
   } else {
@@ -70,6 +72,21 @@ exports.UpdateFamily = async (req, res) => {
   }
 };
 exports.AddChild = async (req, res) => {
+  const MyFamily = await Family.findOne({
+    id: req.body.id,
+  }).exec();
+  if (MyFamily) {
+    let Childrern = [...MyFamily.kids];
+    Childrern.push(req.body.kid);
+    MyFamily.kids = Childrern;
+    MyFamily.save().then((response) => {
+      res.status(200).json({ ok: true, data: MyFamily });
+    });
+  } else {
+    console.log("not found");
+  }
+};
+exports.updateChild = async (req, res) => {
   const MyFamily = await Family.findOne({
     id: req.body.id,
   }).exec();

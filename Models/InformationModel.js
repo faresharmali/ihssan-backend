@@ -9,7 +9,8 @@ const InformationSchema = mongoose.Schema({
   kids:Array,
   famillies:Array,
   author:String,
-  type:String
+  type:String,
+  date:Date
 
 });
 

@@ -4,6 +4,7 @@ exports.CreateInformation = (req, res) => {
   console.log("Information creation");
   Information.create({
     ...req.body,
+    date: new Date()
   })
     .then(() => {
       res.status(200).json({
@@ -27,5 +28,25 @@ exports.GetAllInformations = async (req, res) => {
       status: "error",
       message: e,
     });
+  }
+};
+exports.UpdateInformation = async (req, res) => {
+  let Info = await Information.findOne({
+    id: req.body.id,
+  }).exec();
+  if (Info) {
+    (Info.section = req.body.section),
+      (Info.benificier = req.body.benificier),
+      (Info.content = req.body.content),
+      (Info.title = req.body.title),
+      (Info.kids = req.body.kids),
+      (Info.famillies = req.body.famillies),
+      (Info.type = req.body.type);
+
+    Info.save().then((response) => {
+      res.status(200).json({ ok: true, data: Info });
+    });
+  } else {
+    console.log("not found");
   }
 };
