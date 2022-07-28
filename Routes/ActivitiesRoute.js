@@ -4,6 +4,8 @@ const {
   CreateActivity,
   GetEducationGroupes,
   AddEducationMember,
+  UpdateActivity,
+  DeleteActivity
 } = require("../Controllers/ActivitiesController");
 const {
   AddProgramItem,
@@ -18,5 +20,7 @@ Router.route("/createprogram").post(CreateProgram);
 Router.route("/getprogram").get(GetProgram);
 Router.route("/geteducation").get(GetEducationGroupes);
 Router.route("/addeducationmember").post(AddEducationMember);
+Router.route("/update").post(UpdateActivity);
+Router.route("/delete").post(DeleteActivity);
 
 module.exports = Router;

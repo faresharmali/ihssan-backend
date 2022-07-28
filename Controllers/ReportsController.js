@@ -28,3 +28,19 @@ exports.GetAllReports = async (req, res) => {
     });
   }
 };
+exports.UpdateReport = async (req, res) => {
+  const MyReport = await Report.findOne({
+    id: req.body.id,
+  }).exec();
+  if (MyReport) {
+    MyReport.title = req.body.title;
+    MyReport.content = req.body.content;
+    MyReport.type = req.body.type;
+    MyReport.save().then((response) => {
+      console.log("updated", req.body.type);
+      res.status(200).json({ ok: true, data: MyReport });
+    });
+  } else {
+    console.log("not found");
+  }
+};
