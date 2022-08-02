@@ -1,12 +1,36 @@
 const Information = require("../Models/InformationModel");
+const axios = require("axios");
 
+const Token = require("../Models/TokenModel");
 exports.CreateInformation = (req, res) => {
-  console.log("Information creation");
   Information.create({
     ...req.body,
-    date: new Date()
+    date: new Date(),
   })
-    .then(() => {
+    .then(async () => {
+      const tokens = await Token.find({ job: req.body.section }).exec();
+      let AllTokens = tokens.map((t) => t.token).filter((t) => t != "null");
+      AllTokens.forEach(async (token) => {
+        let message = {
+          to: token,
+          sound: "default",
+          title: "جمعية احسان لكفالة الأيتام",
+          body: req.body.title,
+          data: { someData: "goes here" },
+        };
+        try {
+          await axios.post("https://exp.host/--/api/v2/push/send", message, {
+            headers: {
+              ContentType: " application/json",
+              AcceptEncoding: "gzip, deflate",
+            },
+          });
+        } catch (e) {
+          console.error("error", e);
+        }
+  
+      });
+
       res.status(200).json({
         ok: true,
       });
@@ -48,5 +72,25 @@ exports.UpdateInformation = async (req, res) => {
     });
   } else {
     console.log("not found");
+  }
+};
+exports.DeleteInformation = (req, res) => {
+  try {
+    Information.deleteOne({ id: req.body.id }, function (err) {
+      if (err) {
+        console.log(err);
+        return res.status(404).json({
+          ok: false,
+          message: err,
+        });
+      }
+      res.status(200).json({ ok: true });
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(404).json({
+      ok: false,
+      message: e,
+    });
   }
 };

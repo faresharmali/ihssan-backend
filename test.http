@@ -2,7 +2,7 @@ POST https://exp.host/--/api/v2/push/send
 Content-Type: application/json
 
 {
-      "to": "ExponentPushToken[z2QRCuO1K78fOTZGGcK9eU]",
+      "to": "ExponentPushToken[v3QWJqF6DdhG87DQLfb0mn]",
       "sound": "default",
       "title": "جمعية إحسان لكفالة الأيتام",
       "body": "تم اضافة معلومة تخص قسمك ",

@@ -11,6 +11,7 @@ const {
   AddProgramItem,
   CreateProgram,
   GetProgram,
+  DeleteProgram
 } = require("../Controllers/ProgramsController");
 const Router = express.Router();
 Router.route("/").get(GetAllActivities);
@@ -22,5 +23,6 @@ Router.route("/geteducation").get(GetEducationGroupes);
 Router.route("/addeducationmember").post(AddEducationMember);
 Router.route("/update").post(UpdateActivity);
 Router.route("/delete").post(DeleteActivity);
+Router.route("/deleteprogram").post(DeleteProgram);
 
 module.exports = Router;

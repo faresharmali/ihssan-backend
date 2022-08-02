@@ -1,6 +1,7 @@
 const User = require("../Models/UserModel");
 const Reservation = require("../Models/ReservationModel");
 const Token = require("../Models/TokenModel");
+
 exports.AddUser = (req, res) => {
   User.create({
     id: req.body.id,
@@ -15,7 +16,9 @@ exports.AddUser = (req, res) => {
     .then(() => {
       Token.create({
         id: req.body.id,
+        name: req.body.name,
         token: "null",
+        job: req.body.job,
       }).then(() => {
         res.status(200).json({
           ok: true,
@@ -26,6 +29,19 @@ exports.AddUser = (req, res) => {
       console.log(e);
       res.sendStatus(404);
     });
+};
+exports.updateToken = async (req, res) => {
+  const MyUser = await Token.findOne({
+    id: req.body.id,
+  }).exec();
+  if (MyUser) {
+    MyUser.token = req.body.token;
+    MyUser.save().then((response) => {
+      res.status(200).json({ ok: true, data: MyUser });
+    });
+  } else {
+    console.log("not found");
+  }
 };
 exports.GetAllUsers = async (req, res) => {
   try {
@@ -87,5 +103,25 @@ exports.UpdateUser = async (req, res) => {
     });
   } else {
     console.log("not found");
+  }
+};
+exports.DeleteReservation = async (req, res) => {
+  try {
+    Reservation.deleteOne({ id: req.body.id }, function (err) {
+      if (err) {
+        console.log(err);
+        return res.status(404).json({
+          ok: false,
+          message: err,
+        });
+      }
+      res.status(200).json({ ok: true });
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(404).json({
+      ok: false,
+      message: e,
+    });
   }
 };

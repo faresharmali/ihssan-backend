@@ -18,6 +18,7 @@ exports.AddProgramItem = async (req, res) => {
   }
 };
 exports.CreateProgram = async (req, res) => {
+  console.log("re",req.body)
   Program.create({
     ...req.body,
   })
@@ -50,6 +51,27 @@ exports.GetProgram = async (req, res) => {
     console.log(e);
     res.status(400).json({
       status: "fail",
+      message: e,
+    });
+  }
+};
+exports.DeleteProgram = async (req, res) => {
+  console.log("s",req.body.id)
+  try {
+    Program.deleteOne({ id: req.body.id }, function (err) {
+      if (err) {
+        console.log(err);
+        return res.status(404).json({
+          ok: false,
+          message: err,
+        });
+      }
+      res.status(200).json({ ok: true });
+    });
+  } catch (e) {
+    console.log(e)
+    res.status(404).json({
+      ok: false,
       message: e,
     });
   }
