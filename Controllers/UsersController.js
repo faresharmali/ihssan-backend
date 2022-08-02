@@ -40,6 +40,8 @@ exports.updateToken = async (req, res) => {
       res.status(200).json({ ok: true, data: MyUser });
     });
   } else {
+    res.status(200).json({ ok: false });
+
     console.log("not found");
   }
 };
