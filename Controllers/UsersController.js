@@ -26,6 +26,7 @@ exports.AddUser = (req, res) => {
       });
     })
     .catch((e) => {
+      console.log("username exists");
       console.log(e);
       res.sendStatus(404);
     });
