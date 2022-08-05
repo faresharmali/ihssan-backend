@@ -10,7 +10,11 @@ const UserSchema = mongoose.Schema({
   phone: String,
   job: String,
   token: String,
-  username:String,
+  username:{
+    type: String,
+    required: true,
+    unique: true,
+  },
   password:String,
   famillies:Array,
   joined:Date,
