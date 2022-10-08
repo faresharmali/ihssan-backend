@@ -8,7 +8,8 @@ exports.CreateInformation = (req, res) => {
     date: new Date(),
   })
     .then(async () => {
-      const tokens = await Token.find({ job: req.body.section }).exec();
+      const tokens = await Token.find({ job: req.body.section || "قسم الادارة" }).exec();
+     console.log("tokens",tokens)
       let AllTokens = tokens.map((t) => t.token).filter((t) => t != "null");
       AllTokens.forEach(async (token) => {
         let message = {
