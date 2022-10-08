@@ -9,7 +9,8 @@ const TransactionSchema = mongoose.Schema({
   amount:Number,
   section:String,
   reason:String,
-  income:Boolean
+  income:Boolean,
+  section:String
 });
 
 const Transaction = mongoose.model("Transaction", TransactionSchema);

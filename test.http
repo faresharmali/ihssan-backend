@@ -2,10 +2,10 @@ POST https://exp.host/--/api/v2/push/send
 Content-Type: application/json
 
 {
-      "to": "ExponentPushToken[OcpBpHCsloID8OrbnJ1XtZ]",
+      "to": "ExponentPushToken[LeWfG4LjlQOX2eVG3VaZpo]",
       "sound": "default",
       "title": "جمعية إحسان لكفالة الأيتام",
-      "body": "Nhabek",
+      "body": "يمكنك تسجيل الخروج بالضغط على اخر زر في القائمة",
       "data": { "someData": "goes here"}
 
 }
