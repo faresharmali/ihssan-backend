@@ -6,12 +6,12 @@ exports.Login = async (req, res) => {
     const user = await User.findOne({ username: req.body.username }).exec();
     if (user && user.password == req.body.password) {
       let token = jwt.sign({ ...user._doc }, process.env.JWTSECRET);
-      let { name, phone, job,id } = user;
+      let { name, phone, job,id,username,joined } = user;
       res.status(200).json({
         ok: true,
         status: "success",
         result: {
-          user: { name, phone, job, token,id },
+          user: { name, phone, job, token,id,username,joined },
         },
       });
     } else {

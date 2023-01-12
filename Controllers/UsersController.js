@@ -108,6 +108,23 @@ exports.UpdateUser = async (req, res) => {
     console.log("not found");
   }
 };
+exports.UpdateProfile = async (req, res) => {
+  let MyUser = await User.findOne({
+    id: req.body.id,
+  }).exec();
+  if (MyUser) {
+    MyUser.name=req.body.name
+    MyUser.phone=req.body.phone
+    MyUser.job=req.body.job
+    MyUser.username=req.body.username
+    MyUser.password=req.body.password ? req.body.password : MyUser.password
+    MyUser.save().then((response) => {
+      res.status(200).json({ ok: true, data: MyUser });
+    });
+  } else {
+    console.log("not found");
+  }
+};
 exports.DeleteReservation = async (req, res) => {
   try {
     Reservation.deleteOne({ id: req.body.id }, function (err) {
