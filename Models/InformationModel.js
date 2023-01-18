@@ -8,10 +8,9 @@ const InformationSchema = mongoose.Schema({
   title:String,
   kids:Array,
   famillies:Array,
-  author:String,
   type:String,
-  date:Date
-
+  date:Date,
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
 const Information = mongoose.model("Information", InformationSchema);

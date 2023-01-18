@@ -11,10 +11,12 @@ const FamilySchema = mongoose.Schema({
   phone: String,
   signupDate: String,
   adresse: String,
-  wasseet: String,
   kofa:Boolean,
   sick:Boolean,
   sickness:String,
+  children: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Child' }],
+  delivery: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  wasseet: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
 const Family = mongoose.model("Family", FamilySchema);

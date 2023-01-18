@@ -17,6 +17,8 @@ const UserSchema = mongoose.Schema({
   },
   password:String,
   famillies:Array,
+  followed: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Family' }],
+
   joined:Date,
 });
 

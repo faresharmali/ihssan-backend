@@ -1,20 +1,10 @@
+const Child = require("../Models/ChildModel");
 const Family = require("../Models/FamilyModel");
 exports.AddFamily = (req, res) => {
   Family.create({
-    id: req.body.id,
-    fatherFirstName: req.body.fatherFirstName,
-    fatherLastName: req.body.fatherLastName,
-    motherFullName: req.body.motherFullName,
-    donation: req.body.donation,
-    salary: req.body.salary,
+    ...req.body,
     kids: [],
-    phone: req.body.phone,
     signupDate: new Date(),
-    adresse: req.body.adresse,
-    sick: req.body.sick,
-    sickness: req.body.sickness,
-    wasseet: req.body.wasseet,
-    kofa: req.body.kofa,
   })
     .then(() => {
       res.status(200).json({
@@ -27,18 +17,49 @@ exports.AddFamily = (req, res) => {
     });
 };
 exports.GetAllFamilies = async (req, res) => {
-  try {
-    const data = await Family.find();
-    res.status(200).json({
-      status: "success",
-      result: data,
-    });
-  } catch (e) {
-    res.status(404).json({
-      status: "error",
-      message: e,
-    });
-  }
+  Family.aggregate(
+    [
+      {
+        $lookup: {
+          from: "children",
+          localField: "_id",
+          foreignField: "Family",
+          as: "children",
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "wasseet",
+          foreignField: "_id",
+          as: "wasseet",
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "delivery",
+          foreignField: "_id",
+          as: "delivery",
+        },
+      },
+    ],
+    function (err, famillies) {
+      if (err) {
+        res.status(404).json({
+          status: "error",
+          message: err,
+        });
+      } else {
+        console.log(famillies);
+        res.status(200).json({
+          status: "success",
+          result: famillies,
+        });
+      }
+    }
+  );
+
 };
 exports.GetFamily = (req, res) => {
   res.send(req.params.id);
@@ -51,20 +72,12 @@ exports.UpdateFamily = async (req, res) => {
     id: req.body.id,
   }).exec();
   if (MyFamily) {
-    MyFamily.fatherFirstName= req.body.fatherFirstName
-    MyFamily.fatherLastName= req.body.fatherLastName
-    MyFamily.motherFullName= req.body.motherFullName
-    MyFamily.donation= req.body.donation
-    MyFamily.salary= req.body.salary
-    MyFamily.phone= req.body.phone
-    MyFamily.adresse= req.body.adresse
-    MyFamily.sick= req.body.sick
-    MyFamily.sickness= req.body.sickness
-    MyFamily.wasseet= req.body.wasseet
-    MyFamily.kofa= req.body.kofa
-    MyFamily.kids= req.body.kids
+    Object.keys(req.body).forEach((key) => {
+      if (key !== "id") {
+        MyFamily[key] = req.body[key];
+      }
+    });
     MyFamily.save().then((response) => {
-      console.log("updated",req.body.kids)
       res.status(200).json({ ok: true, data: MyFamily });
     });
   } else {
@@ -73,15 +86,22 @@ exports.UpdateFamily = async (req, res) => {
 };
 exports.AddChild = async (req, res) => {
   const MyFamily = await Family.findOne({
-    id: req.body.id,
+    _id: req.body.id,
   }).exec();
   if (MyFamily) {
-    let Childrern = [...MyFamily.kids];
-    Childrern.push(req.body.kid);
-    MyFamily.kids = Childrern;
-    MyFamily.save().then((response) => {
-      res.status(200).json({ ok: true, data: MyFamily });
-    });
+    Child.create({
+      Family: MyFamily._id,
+      ...req.body.kid,
+    })
+      .then(() => {
+        res.status(200).json({
+          ok: true,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+        res.sendStatus(404);
+      });
   } else {
     console.log("not found");
   }

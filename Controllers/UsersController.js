@@ -42,23 +42,43 @@ exports.updateToken = async (req, res) => {
     });
   } else {
     res.status(200).json({ ok: false });
-
     console.log("not found");
   }
 };
 exports.GetAllUsers = async (req, res) => {
-  try {
-    const data = await User.find();
-    res.status(200).json({
-      ok: true,
-      result: data,
-    });
-  } catch (e) {
-    res.status(404).json({
-      ok: false,
-      message: e,
-    });
-  }
+  User.aggregate(
+    [
+      {
+        $lookup: {
+          from: "families",
+          localField: "_id",
+          foreignField: "wasseet",
+          as: "followers",
+        },
+      },
+      {
+        $lookup: {
+          from: "families",
+          localField: "_id",
+          foreignField: "delivery",
+          as: "deliveries",
+        },
+      },
+    ],
+    function (err, users) {
+      if (err) {
+        res.status(404).json({
+          ok: false,
+          message: err,
+        });
+      } else {
+        res.status(200).json({
+          ok: true,
+          result: users,
+        });
+      }
+    }
+  );
 };
 exports.getReservation = async (req, res) => {
   try {
@@ -113,11 +133,11 @@ exports.UpdateProfile = async (req, res) => {
     id: req.body.id,
   }).exec();
   if (MyUser) {
-    MyUser.name=req.body.name
-    MyUser.phone=req.body.phone
-    MyUser.job=req.body.job
-    MyUser.username=req.body.username
-    MyUser.password=req.body.password ? req.body.password : MyUser.password
+    Object.keys(req.body).forEach((key) => {
+      if (key !== "id") {
+        MyUser[key] = req.body[key];
+      }
+    });
     MyUser.save().then((response) => {
       res.status(200).json({ ok: true, data: MyUser });
     });
