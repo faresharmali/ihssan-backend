@@ -22,9 +22,7 @@ const CheckToken = (req, res, next) => {
   });
 };
 
-app.use("/",(req,res)=>{
-  res.send("Welcome to the API")
-} );
+
 app.use("/families", CheckToken, FamilyRouter);
 app.use("/users", UsersRouter);
 app.use("/informations", CheckToken, InformationsRouter);
