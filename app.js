@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 var jwt = require("jsonwebtoken");
-app.use(express.static('public'))
 
 const FamilyRouter = require("./Routes/FamilyRoute");
 const UsersRouter = require("./Routes/UsersRoute");
