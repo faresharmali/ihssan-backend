@@ -15,10 +15,10 @@ const Router = express.Router();
 Router.route("/").get(GetAllFamilies)
 Router.route("/:id").get(GetFamily);
 Router.route("/update").post(UpdateFamily);
-Router.route("/delete").delete(DeleteFamily);
+Router.route("/deletefamily").post(DeleteFamily);
 Router.route("/add").post(AddFamily);
 Router.route("/addchild").post(AddChild);
-Router.route("/updatechild").patch(updateChild);
-Router.route("/deletechild").delete(DeleteChild);
+Router.route("/updatechild").post(updateChild);
+Router.route("/deletechild").post(DeleteChild);
 
 module.exports = Router;

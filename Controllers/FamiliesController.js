@@ -106,6 +106,7 @@ exports.updateChild = async (req, res) => {
     id: req.body.id,
   }).exec();
   if (MyChild) {
+    console.log("Object.keys(req.body)", Object.keys(req.body))
     Object.keys(req.body).forEach((key) => {
       if (key !== "id") {
         MyChild[key] = req.body[key];
@@ -119,7 +120,7 @@ exports.updateChild = async (req, res) => {
   }
 };
 exports.DeleteChild = async (req, res) => {
-  Child.deleteOne({ id: req.body.id }, function (err) {
+  Child.deleteOne({ identifier: req.body.identifier }, function (err) {
     if (err) {
       return res.status(404).json({
         ok: false,
