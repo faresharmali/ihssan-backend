@@ -1,6 +1,7 @@
 const User = require("../Models/UserModel");
 const Reservation = require("../Models/ReservationModel");
 const Token = require("../Models/TokenModel");
+const axios = require("axios");
 
 exports.AddUser = (req, res) => {
   User.create({
@@ -103,6 +104,7 @@ exports.AddReservation = async (req, res) => {
   })
     .then(async() => {
       const tokens = await Token.find({})
+      console.log("tokens",tokens)
       let AllTokens = tokens.map((t) => t.token).filter((t) => t != "null");
       AllTokens.forEach(async (token) => {
         let message = {
