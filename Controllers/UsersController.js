@@ -81,19 +81,21 @@ exports.GetAllUsers = async (req, res) => {
   );
 };
 exports.getReservation = async (req, res) => {
-  try {
-    const data = await Reservation.find();
-    res.status(200).json({
-      ok: true,
-      meetings: data,
-    });
-  } catch (e) {
-    console.log(e);
-    res.status(404).json({
-      ok: false,
+  Reservation.find().populate('user').exec(function (err, data) {
+    if (err){
+      res.status(404).json({
+        ok: false,
       message: e,
-    });
-  }
+      });
+    }else{
+      res.status(200).json({
+        ok: true,
+        meetings: data,
+      });
+    }
+   
+  });
+
 };
 exports.AddReservation = async (req, res) => {
   Reservation.create({
@@ -144,6 +146,19 @@ exports.UpdateProfile = async (req, res) => {
   } else {
     console.log("not found");
   }
+};
+exports.DeleteUser = async (req, res) => {
+    User.deleteOne({ id: req.body.id }, function (err) {
+      if (err) {
+        console.log(err);
+        return res.status(404).json({
+          ok: false,
+          message: err,
+        });
+      }
+      res.status(200).json({ ok: true });
+    });
+
 };
 exports.DeleteReservation = async (req, res) => {
   try {

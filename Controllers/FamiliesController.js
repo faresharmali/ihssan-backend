@@ -51,7 +51,6 @@ exports.GetAllFamilies = async (req, res) => {
           message: err,
         });
       } else {
-        console.log(famillies);
         res.status(200).json({
           status: "success",
           result: famillies,
@@ -59,13 +58,9 @@ exports.GetAllFamilies = async (req, res) => {
       }
     }
   );
-
 };
 exports.GetFamily = (req, res) => {
   res.send(req.params.id);
-};
-exports.DeleteFamily = (req, res) => {
-  res.send("DeleteFamily");
 };
 exports.UpdateFamily = async (req, res) => {
   const MyFamily = await Family.findOne({
@@ -107,17 +102,42 @@ exports.AddChild = async (req, res) => {
   }
 };
 exports.updateChild = async (req, res) => {
-  const MyFamily = await Family.findOne({
+  const MyChild = await Child.findOne({
     id: req.body.id,
   }).exec();
-  if (MyFamily) {
-    let Childrern = [...MyFamily.kids];
-    Childrern.push(req.body.kid);
-    MyFamily.kids = Childrern;
-    MyFamily.save().then((response) => {
-      res.status(200).json({ ok: true, data: MyFamily });
+  if (MyChild) {
+    Object.keys(req.body).forEach((key) => {
+      if (key !== "id") {
+        MyChild[key] = req.body[key];
+      }
+    });
+    MyChild.save().then((response) => {
+      res.status(200).json({ ok: true, data: MyChild });
     });
   } else {
     console.log("not found");
   }
+};
+exports.DeleteChild = async (req, res) => {
+  Child.deleteOne({ id: req.body.id }, function (err) {
+    if (err) {
+      return res.status(404).json({
+        ok: false,
+        message: err,
+      });
+    }
+    res.status(200).json({ ok: true });
+  });
+};
+exports.DeleteFamily = async (req, res) => {
+  Family.deleteOne({ id: req.body.id }, function (err) {
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        ok: false,
+        message: err,
+      });
+    }
+    res.status(200).json({ ok: true });
+  });
 };

@@ -37,7 +37,6 @@ exports.UpdateReport = async (req, res) => {
     MyReport.content = req.body.content;
     MyReport.type = req.body.type;
     MyReport.save().then((response) => {
-      console.log("updated", req.body.type);
       res.status(200).json({ ok: true, data: MyReport });
     });
   } else {

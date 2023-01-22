@@ -14,6 +14,7 @@ const FamilySchema = mongoose.Schema({
   kofa:Boolean,
   sick:Boolean,
   sickness:String,
+  lastDelivery:String,
   children: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Child' }],
   delivery: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   wasseet: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

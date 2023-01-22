@@ -122,3 +122,14 @@ exports.DeleteHassala = async (req, res) => {
     });
   }
 };
+exports.DeleteTransaction = async (req, res) => {
+  Transaction.deleteOne({ identifier: req.body.id }, function (err) {
+    if (err) {
+      return res.status(404).json({
+        ok: false,
+        message: err,
+      });
+    }
+    res.status(200).json({ ok: true });
+  });
+};

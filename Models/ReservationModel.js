@@ -6,6 +6,8 @@ const ReservationSchema = mongoose.Schema({
   date: Date,
   time: String,
   DateString: String,
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+
 });
 
 const Reservation = mongoose.model("Reservation", ReservationSchema);

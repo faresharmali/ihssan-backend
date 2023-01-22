@@ -7,7 +7,8 @@ const {
   AddHassala,
   CloseHassala,
   UpdateHassala,
-  DeleteHassala
+  DeleteHassala,
+  DeleteTransaction
 } = require("../Controllers/TransactionController");
 
 const Router = express.Router();
@@ -19,5 +20,6 @@ Router.route("/addhassala").post(AddHassala);
 Router.route("/updatehassala").post(UpdateHassala);
 Router.route("/closehassala").post(CloseHassala);
 Router.route("/deletehassala").post(DeleteHassala);
+Router.route("/deletetransaction").post(DeleteTransaction);
 
 module.exports = Router;
