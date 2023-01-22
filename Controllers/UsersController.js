@@ -101,7 +101,29 @@ exports.AddReservation = async (req, res) => {
   Reservation.create({
     ...req.body,
   })
-    .then(() => {
+    .then(async() => {
+      const tokens = await Token.find({})
+      let AllTokens = tokens.map((t) => t.token).filter((t) => t != "null");
+      AllTokens.forEach(async (token) => {
+        let message = {
+          to: token,
+          sound: "default",
+          title: "جمعية احسان لكفالة الأيتام",
+          body: req.body.description,
+          data: { someData: "goes here" },
+        };
+        try {
+          await axios.post("https://exp.host/--/api/v2/push/send", message, {
+            headers: {
+              ContentType: " application/json",
+              AcceptEncoding: "gzip, deflate",
+            },
+          });
+        } catch (e) {
+          console.error("error", e);
+        }
+      });
+
       res.status(200).json({
         ok: true,
       });
