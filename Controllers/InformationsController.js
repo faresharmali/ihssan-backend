@@ -8,9 +8,16 @@ exports.CreateInformation = (req, res) => {
     date: new Date(),
   })
     .then(async () => {
-      const tokens = await Token.find({
-        job: { $in: [req.body.section, "قسم الادارة"] },
-      }).exec();
+      let tokens;
+      if (req.body.section == "كل الأقسام") {
+        tokens = await Token.find()
+      }else{
+        tokens = await Token.find({
+          job: { $in: [req.body.section, "قسم الادارة"] },
+        }).exec();
+      }
+
+      console.log("tokens", tokens)
       let AllTokens = tokens.map((t) => t.token).filter((t) => t != "null");
       AllTokens.forEach(async (token) => {
         let message = {
@@ -42,20 +49,21 @@ exports.CreateInformation = (req, res) => {
     });
 };
 exports.GetAllInformations = async (req, res) => {
-  Information.find().populate('author').exec(function (err, infos) {
-    if (err){
-      res.status(404).json({
-        status: "error",
-        message: e,
-      });
-    }else{
-      res.status(200).json({
-        status: "success",
-        result: infos,
-      });
-    }
-   
-  });
+  Information.find()
+    .populate("author")
+    .exec(function (err, infos) {
+      if (err) {
+        res.status(404).json({
+          status: "error",
+          message: e,
+        });
+      } else {
+        res.status(200).json({
+          status: "success",
+          result: infos,
+        });
+      }
+    });
 };
 exports.UpdateInformation = async (req, res) => {
   let Info = await Information.findOne({
