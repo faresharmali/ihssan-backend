@@ -59,7 +59,7 @@ exports.GetAllInformations = async (req, res) => {
       } else {
         res.status(200).json({
           status: "success",
-          result: infos,
+          result: infos.reverse(),
         });
       }
     });
