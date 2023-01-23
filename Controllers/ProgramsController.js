@@ -56,7 +56,6 @@ exports.GetProgram = async (req, res) => {
   }
 };
 exports.DeleteProgram = async (req, res) => {
-  console.log("s",req.body.id)
   try {
     Program.deleteOne({ id: req.body.id }, function (err) {
       if (err) {

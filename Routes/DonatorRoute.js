@@ -5,7 +5,10 @@ const {
   AddDonation,
   GetDonations,
   ExtendKafala,
-  UpdateDonator
+  UpdateDonator,
+  UpdateDonatorInfos,
+  deleteDonator
+
 
 } = require("../Controllers/DonatorController");
 
@@ -17,6 +20,8 @@ Router.route("/newdonation").post(AddDonation);
 Router.route("/getdonations").get(GetDonations);
 Router.route("/extend").post(ExtendKafala);
 Router.route("/update").post(UpdateDonator);
+Router.route("/updateinfos").post(UpdateDonatorInfos);
+Router.route("/delete").post(deleteDonator);
 
 
 module.exports = Router;

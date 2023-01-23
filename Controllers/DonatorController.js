@@ -101,3 +101,42 @@ exports.UpdateDonator = async (req, res) => {
     console.log("not found");
   }
 };
+exports.UpdateDonatorInfos = async (req, res) => {
+  const MyUser = await Donator.findOne({
+    id: req.body.id,
+  }).exec();
+  if (MyUser) {
+    Object.keys(req.body).forEach((key) => {
+      if (key !== "id") {
+        MyUser[key] = req.body[key];
+      }
+    });
+    MyUser.save().then((response) => {
+      res.status(200).json({ ok: true, data: MyUser });
+    });
+  } else {
+    console.log("not found");
+  }
+};
+exports.deleteDonator = async (req, res) => {
+  console.log("deleting",req.body)
+  try {
+    Donator.deleteOne({ id: req.body.id }, function (err) {
+      if (err) {
+        console.log(err);
+        return res.status(404).json({
+          ok: false,
+          message: err,
+        });
+      }
+      res.status(200).json({ ok: true });
+    });
+  } catch (e) {
+    console.log(e)
+    res.status(404).json({
+      ok: false,
+      message: e,
+    });
+  }
+  
+};
