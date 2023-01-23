@@ -10,14 +10,13 @@ exports.CreateInformation = (req, res) => {
     .then(async () => {
       let tokens;
       if (req.body.section == "كل الأقسام") {
-        tokens = await Token.find()
-      }else{
+        tokens = await Token.find();
+      } else {
         tokens = await Token.find({
           job: { $in: [req.body.section, "قسم الادارة"] },
         }).exec();
       }
 
-      console.log("tokens", tokens)
       let AllTokens = tokens.map((t) => t.token).filter((t) => t != "null");
       AllTokens.forEach(async (token) => {
         let message = {
